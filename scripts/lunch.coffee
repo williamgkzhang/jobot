@@ -112,7 +112,6 @@ module.exports = (robot) ->
         list += "- #{user.name} - #{if user.pick then user.pick else "TBD"}\n"
 
       msg.send list
-
   # Set lunch pick
   robot.respond /lunch pick (.+)$/i, (msg) ->
     user = @robot.brain.data.users[msg.message.user.id]
