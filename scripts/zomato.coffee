@@ -19,7 +19,7 @@ module.exports = (robot) ->
   robot.respond /restaurant (.+)$/i, (msg) ->
     query = msg.match[1]
     msg.http("https://developers.zomato.com/api/v2.1/search")
-      .query(entity_id: 772, entity_type: "city", q: query)
+      .query(lat: 30.1828441, lon: -92.0140851, sort: "real_distance", q: query)
       .headers("user-key": process.env.ZOMATO_API_KEY, Accept: "application/json")
       .get() (err, res, body) ->
         restaurants = JSON.parse(body).restaurants
