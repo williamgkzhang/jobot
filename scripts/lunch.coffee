@@ -24,8 +24,10 @@
 # Author:
 #   flipxfx
 module.exports = (robot) ->
-  moment = require "moment"
-  require "moment-range"
+  Moment = require "moment"
+  MomentRange = require "moment-range"
+  moment = MomentRange.extendMoment(Moment)
+
   # Ghetto load until this is done https://github.com/github/hubot/pull/1154
   require("dotenv").config
     silent: true
