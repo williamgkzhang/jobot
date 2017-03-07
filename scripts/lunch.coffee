@@ -14,9 +14,12 @@
 #   jobot lunch - responds with the lunch schedule
 #   jobot lunch join - join the lunch club, resets user info and pick
 #   jobot lunch pick - displays your lunch pick
+#   jobot lunch picks - displays all current lunch picks
 #   jobot lunch pick X - sets your lunch pick
 #   jobot lunch leave - leave the lunch club
 #   jobot lunch site - links to the lunch site
+#   jobot lunch skip - sets current picker to next in list
+#   jobot lunch unskip - sets current picker to previous in list
 #
 # Notes:
 #   You gonna need a Firebase with the right data.
@@ -105,6 +108,19 @@ module.exports = (robot) ->
           msg.send "@#{user.name} has no lunch pick :slightly_frowning_face:"
       else
           msg.send "@#{user.name} is not in the lunch club :thumbsdown:"
+
+  # Display lunch picks
+  robot.respond /lunch picks$/i, (msg) ->
+    database.ref("lunch/users").once("value").then (snapshot) ->
+      # Build sorted user list
+      users = []
+      for id, user of snapshot.val()
+        user.id = id
+        users.push user
+      users.sort (a, b) -> a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+
+      for user, index in users
+        msg.send "#{user.name}#{if user.pick then " - #{user.pick}" else ''}"
 
   # Set lunch pick
   robot.respond /lunch pick (.+)$/i, (msg) ->
