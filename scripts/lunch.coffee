@@ -127,10 +127,13 @@ module.exports = (robot) ->
     user = @robot.brain.data.users[msg.message.user.id]
     database.ref("lunch/users/#{user.id}").once("value").then (snapshot) ->
       if snapshot.val()
-        database.ref("lunch/users/#{user.id}").update pick: msg.match[1]
-        msg.send "@#{user.name} set lunch pick to *#{msg.match[1]}*"
+        if msg.match[1].length <= 40
+          database.ref("lunch/users/#{user.id}").update pick: msg.match[1]
+          msg.send "@#{user.name} set lunch pick to *#{msg.match[1]}*"
+        else
+          msg.send "@#{user.name} tried to set the lunch pick some obnoxiously long name :disapproval:"
       else
-          msg.send "@#{user.name} is not in the lunch club :thumbsdown:"
+        msg.send "@#{user.name} is not in the lunch club :thumbsdown:"
 
   # Leave lunch club
   robot.respond /lunch leave$/i, (msg) ->
