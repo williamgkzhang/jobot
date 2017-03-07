@@ -78,7 +78,7 @@ module.exports = (robot) ->
         unless index is currentUser
           list += "#{user.name}"
         else
-          list += "*#{user.name}#{if user.pick then " - #{user.pick}" else ''}*"
+          list += "*#{user.name} - #{if user.pick then user.pick else "TBD"}*"
         list += ", " unless index is users.length - 1
 
       callback("*#{currentDate.format "dddd, MMMM D"}* | #{list}")
@@ -119,8 +119,11 @@ module.exports = (robot) ->
         users.push user
       users.sort (a, b) -> a.name.toLowerCase().localeCompare(b.name.toLowerCase())
 
+      list = ""
       for user, index in users
-        msg.send "#{user.name}#{if user.pick then " - #{user.pick}" else ''}"
+        list += "- #{user.name} - #{if user.pick then user.pick else "TBD"}\n"
+
+      msg.send list
 
   # Set lunch pick
   robot.respond /lunch pick (.+)$/i, (msg) ->
