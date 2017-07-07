@@ -2,6 +2,11 @@
 #
 # Require like `database = require("../lib/firebase-database")()`
 
+# Ghetto load until this is done https://github.com/github/hubot/pull/1154
+require("dotenv").config
+  silent: true
+  path: ".env"
+
 admin = require "firebase-admin"
 
 module.exports = ->

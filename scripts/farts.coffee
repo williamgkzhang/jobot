@@ -21,18 +21,13 @@
 # Author:
 #   flipxfx
 module.exports = (robot) ->
-  # Ghetto load until this is done https://github.com/github/hubot/pull/1154
-  require("dotenv").config
-    silent: true
-    path: ".env"
-
   # Get firebase database
   database = require("../lib/firebase-database")()
 
   # Add farts
-  robot.respond /farts/i, (msg) ->
+  robot.respond /farts$/i, (msg) ->
     database.ref("farts/count").once("value").then (snapshot) ->
-      msg.send "*#{snapshot.val()}* farts :dash: :clap:"
+      msg.send ":clap: *#{snapshot.val()}* farts :dash:"
 
   # Add farts
   robot.hear /(?:^|\s)farts\+(\d)(?:$|\s)/i, (msg) ->

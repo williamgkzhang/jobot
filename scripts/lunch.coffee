@@ -31,11 +31,6 @@ module.exports = (robot) ->
   MomentRange = require "moment-range"
   moment = MomentRange.extendMoment(Moment)
 
-  # Ghetto load until this is done https://github.com/github/hubot/pull/1154
-  require("dotenv").config
-    silent: true
-    path: ".env"
-
   # Get firebase database
   database = require("../lib/firebase-database")()
 
