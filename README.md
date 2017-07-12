@@ -19,7 +19,7 @@ jobot adapter - Reply with the adapter
 jobot clear - jobot licks the screen clean with newlines
 jobot echo <text> - Reply back with <text>
 jobot farts - displays the current number of farts
-jobot help - Displays all of the help commands that this bot knows about.
+jobot help - Displays all of the help commands that Hubot knows about.
 jobot help <query> - Displays all help commands that match <query>.
 jobot lunch - responds with the lunch schedule
 jobot lunch join - join the lunch club, resets user info and pick
@@ -32,5 +32,7 @@ jobot lunch skip - sets current picker to next in list
 jobot lunch unskip - sets current picker to previous in list
 jobot ping - Reply with pong
 jobot restaurant - responds with restaurant info
+jobot run X - displays the result of Javascript X (newlines ok)
+jobot run ```X``` - displays the result of Javascript X (easier for newlines)
 jobot time - Reply with current time
 ```

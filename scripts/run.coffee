@@ -3,7 +3,8 @@
 #
 #
 # Commands:
-#   jobot run X - displays the result of the Javascript statement
+#   jobot run X - displays the result of Javascript X (newlines ok)
+#   jobot run ```X``` - displays the result of Javascript X (easier for newlines)
 #
 # Author:
 #   flipxfx
@@ -11,7 +12,7 @@
 helpers = require "../lib/helpers"
 
 module.exports = (robot) ->
-  robot.respond /run(?: |\n|\r|```)([^]+)$/i, (msg) ->
+  robot.respond /run(?: |\n|\r| ```)([^]+)$/i, (msg) ->
     msg.http("https://jobot-run-065n9y2ycsx5.runkit.sh")
       .query(run: helpers.replaceWordChars(msg.match[1].replace(/```$/, "")))
       .headers(Accept: "application/json")
