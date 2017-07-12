@@ -21,9 +21,4 @@ module.exports = (robot) ->
   robot.respond /(?:^|\s)playit(?:$|\s)/i, (msg) ->
     video_id = videos[Math.floor(videos.length * Math.random())]
     video = "https://www.youtube.com/watch?v=" + video_id + "&list=PLPHqjtjDicA6IyQJOnnTPDeEz2XyZ5lb6"
-    msg.send
-      attachments: [
-        fallback: "Check out this video"
-        pretext: "Hot video right here"
-        title_link: video
-      ]
+    msg.send video
