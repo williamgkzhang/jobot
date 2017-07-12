@@ -29,6 +29,6 @@ module.exports = (robot) ->
           catch e
 
         if error?
-          msg.send ":boom: *it blowd up*: #{error}"
+          msg.send ":runner: :boom:: #{error}"
         else
-          msg.send body
+          msg.send ":runner:: #{body}"
