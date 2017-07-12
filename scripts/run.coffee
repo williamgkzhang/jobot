@@ -13,8 +13,9 @@ helpers = require "../lib/helpers"
 
 module.exports = (robot) ->
   robot.respond /run(?: |\n|\r| ```)([^]+)$/i, (msg) ->
+    console.log msg.match[1].replace(/```$/, "")
     msg.http("https://jobot-run-065n9y2ycsx5.runkit.sh")
-      .query(run: helpers.replaceWordChars(msg.match[1].replace(/```$/, "")))
+      .query(run: helpers.replaceWordChars(msg.match[1].replace(/^```/, "").replace(/```$/, "")))
       .headers(Accept: "application/json")
       .get() (err, res, body) ->
         # Get error if any
